@@ -1,297 +1,244 @@
-# Money Manager - Complete Full Stack Application
+# Money Manager Frontend
 
-A comprehensive financial management web application built with **React**, **Tailwind CSS**, **Java Spring Boot**, and **MongoDB Atlas**.
+A React-based web application for managing personal and business finances with an intuitive dashboard, transaction tracking, and financial analytics.
 
-## 📋 Project Overview
+## 📋 Table of Contents
 
-Money Manager is a full-featured web application that allows users to:
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Running the Application](#running-the-application)
+- [Environment Variables](#environment-variables)
+- [Available Scripts](#available-scripts)
+- [API Integration](#api-integration)
+- [Component Documentation](#component-documentation)
+- [Styling](#styling)
+- [Contributing](#contributing)
 
-- Track income and expenses with detailed categorization
-- Manage multiple bank accounts
-- Transfer funds between accounts
-- View financial analytics and reports
-- Filter transactions by category, division, and date range
-- Edit transactions within 12 hours of creation
-- Generate spending summaries
+## ✨ Features
+
+- **Dashboard**: View income and expenses with monthly, weekly, and yearly breakdowns
+- **Transaction Management**: Add, edit, and delete income and expense transactions
+- **Categories**: Track transactions with predefined categories (Food, Fuel, Movie, Medical, Loan, etc.)
+- **Divisions**: Categorize expenses into Office or Personal divisions
+- **Date Range Filtering**: Filter transactions between specific dates
+- **Edit Restrictions**: Transactions can only be edited within 12 hours of creation
+- **Category Summary**: View summary of expenses by category
+- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
+
+## 🛠 Tech Stack
+
+- **Framework**: React 18.2.0
+- **Routing**: React Router v6.20.0
+- **Styling**: Tailwind CSS 3.3.6
+- **HTTP Client**: Axios 1.6.0
+- **Charts**: Recharts 2.10.0
+- **State Management**: Zustand 4.4.0
+- **Icons**: React Icons 4.12.0
+- **Date Handling**: date-fns 2.30.0
 
 ## 📁 Project Structure
 
 ```
-Money Manager Frontend/
-├── frontend/                 # React Frontend Application
-│   ├── public/
-│   ├── src/
-│   ├── package.json
-│   ├── tailwind.config.js
-│   └── README.md
-├── backend/                  # Spring Boot Backend API
-│   ├── src/
-│   ├── pom.xml
-│   ├── README.md
-│   └── .gitignore
-└── README.md                 # This file
+frontend/
+├── public/                          # Static assets
+│   └── index.html                  # HTML entry point
+├── src/
+│   ├── components/                 # Reusable React components
+│   │   ├── Sidebar.jsx            # Navigation sidebar
+│   │   ├── Navbar.jsx             # Top navigation bar
+│   │   └── TransactionModal.jsx   # Modal for adding transactions
+│   ├── pages/                     # Page components
+│   │   ├── HomePage.jsx           # Home/Main page
+│   │   └── Dashboard.jsx          # Dashboard with analytics
+│   ├── services/                  # API service layer
+│   │   └── api.js                # API client configuration
+│   ├── styles/                    # CSS files
+│   │   ├── index.css             # Global styles
+│   │   └── App.css               # Application styles
+│   ├── utils/                    # Utility functions
+│   │   ├── store.js              # Zustand store management
+│   │   └── helpers.js            # Helper functions
+│   ├── hooks/                    # Custom React hooks
+│   ├── App.jsx                   # Root app component
+│   └── index.jsx                 # React entry point
+├── package.json                  # Project dependencies
+├── tailwind.config.js           # Tailwind CSS configuration
+├── postcss.config.js            # PostCSS configuration
+├── .gitignore                   # Git ignore rules
+└── README.md                    # This file
 ```
 
-## 🛠 Tech Stack
+## 🚀 Installation
 
-### Frontend
-- **React** 18.2.0
-- **Tailwind CSS** 3.3.6
-- **React Router** v6.20.0
-- **Axios** 1.6.0
-- **Recharts** 2.10.0
-- **Zustand** 4.4.0
-- **React Icons** 4.12.0
+### Prerequisites
 
-### Backend
-- **Java** 17
-- **Spring Boot** 3.2.0
-- **Spring Data MongoDB**
-- **Spring Security**
-- **MongoDB Atlas**
-- **Maven** 3.9+
+- Node.js (v16 or higher)
+- npm or yarn package manager
 
-## 🚀 Quick Start
+### Steps
 
-### Frontend Setup
+1. **Clone the repository** (if applicable)
+   ```bash
+   git clone <repository-url>
+   cd Money\ Manager\ Frontend/frontend
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Setup environment variables**
+   Create a `.env.local` file in the frontend directory:
+   ```
+   REACT_APP_API_URL=http://localhost:8080/api
+   ```
+
+## 🏃 Running the Application
+
+### Development Mode
 
 ```bash
-# Navigate to frontend directory
-cd "Money Manager Frontend/frontend"
-
-# Install dependencies
-npm install
-
-# Start development server
 npm start
 ```
 
-Frontend will be available at: `http://localhost:3000`
+The application will open at `http://localhost:3000`
 
-### Backend Setup
+### Production Build
 
-```bash
-# Navigate to backend directory
-cd "Money Manager Frontend/backend"
-
-# Build with Maven
-mvn clean install
-
-# Run application
-mvn spring-boot:run
-```
-
-Backend API will be available at: `http://localhost:8080/api`
-
-## 🔐 Configuration
-
-### Frontend (.env.local)
-```
-REACT_APP_API_URL=http://localhost:8080/api
-```
-
-### Backend (application-dev.yml)
-```yaml
-spring:
-  data:
-    mongodb:
-      uri: mongodb+srv://username:password@cluster.mongodb.net/money-manager
-```
-
-## 📚 Key Features
-
-### 1. Dashboard
-- **Monthly View**: Income and expense trends
-- **Weekly View**: Daily breakdown of transactions
-- **Yearly View**: Annual financial overview
-- **Charts**: Visual representation of financial data
-- **Category Summary**: Breakdown by transaction category
-
-### 2. Transaction Management
-- Add income and expense transactions
-- Categorize with predefined categories:
-  - Food, Fuel, Movie, Medical, Loan, Salary, Freelance, Investment, Gift, Bonus
-- Divide into Office or Personal categories
-- Date and time tracking
-- 12-hour edit window
-- Soft delete functionality
-
-### 3. Account Management
-- Create multiple accounts (Checking, Savings, etc.)
-- Track account balances
-- View total balance across accounts
-- Deactivate accounts
-- Account transaction history
-
-### 4. Fund Transfers
-- Transfer between user accounts
-- Automatic balance updates
-- Transfer history tracking
-- Date range filtering
-
-### 5. Filtering & Reporting
-- Filter by transaction type (Income/Expense)
-- Filter by category
-- Filter by division (Office/Personal)
-- Filter by date range
-- Generate financial reports
-
-## 🔗 API Endpoints
-
-### Transactions
-- `GET /api/transactions` - Get all transactions
-- `POST /api/transactions` - Create transaction
-- `GET /api/transactions/{id}` - Get by ID
-- `PUT /api/transactions/{id}` - Update transaction
-- `DELETE /api/transactions/{id}` - Delete transaction
-- `GET /api/transactions/type/{type}` - Filter by type
-- `GET /api/transactions/category/{category}` - Filter by category
-- `GET /api/transactions/division/{division}` - Filter by division
-- `GET /api/transactions/filter/date-range` - Filter by date range
-
-### Accounts
-- `GET /api/accounts` - Get all accounts
-- `POST /api/accounts` - Create account
-- `GET /api/accounts/{id}` - Get account by ID
-- `PUT /api/accounts/{id}` - Update account
-- `GET /api/accounts/active` - Get active accounts
-- `PATCH /api/accounts/{id}/deactivate` - Deactivate account
-- `GET /api/accounts/total-balance` - Get total balance
-
-### Transfers
-- `POST /api/accounts/transfer` - Create transfer
-- `GET /api/accounts/transfer` - Get all transfers
-- `GET /api/accounts/transfer/account/{accountId}` - Get account transfers
-- `GET /api/accounts/transfer/filter/date-range` - Filter by date range
-
-## 📖 Documentation
-
-For detailed documentation:
-- **Frontend**: See [frontend/README.md](./frontend/README.md)
-- **Backend**: See [backend/README.md](./backend/README.md)
-
-## 🗄 Database
-
-Uses **MongoDB Atlas** for data persistence with the following collections:
-- **transactions** - All income/expense records
-- **accounts** - Bank accounts
-- **transfers** - Fund transfers
-- **users** - User profiles
-
-## 🔒 Security Features
-
-- User-based data isolation
-- JWT token support
-- CORS configuration for frontend integration
-- Input validation with Jakarta Bean Validation
-- 12-hour transaction edit restriction
-- Soft delete for data recovery
-
-## 💻 System Requirements
-
-- **Node.js**: v16 or higher
-- **Java**: JDK 17 or higher
-- **Maven**: 3.9 or higher
-- **MongoDB Atlas**: Account with cluster
-- **Modern Browser**: Chrome, Firefox, Safari, Edge
-
-## 📦 Dependencies
-
-### Frontend Dependencies
-See [frontend/package.json](./frontend/package.json) for complete list.
-
-Key dependencies:
-- react, react-dom
-- react-router-dom
-- axios
-- recharts
-- zustand
-- tailwindcss
-
-### Backend Dependencies
-See [backend/pom.xml](./backend/pom.xml) for complete list.
-
-Key dependencies:
-- spring-boot-starter-web
-- spring-boot-starter-data-mongodb
-- spring-boot-starter-security
-- jjwt (JWT)
-- modelmapper
-- lombok
-
-## 🚀 Deployment
-
-### Frontend (Vercel/Netlify)
 ```bash
 npm run build
 ```
 
-### Backend (Heroku/AWS)
+This creates an optimized production build in the `build/` directory.
+
+### Running Tests
+
 ```bash
-mvn clean package
+npm test
 ```
 
-## 🔄 Environment Profiles
+## 🔐 Environment Variables
 
-### Backend
-- **dev**: Development with local MongoDB
-- **prod**: Production with MongoDB Atlas
+Create a `.env.local` file in the frontend directory:
 
-## 🐛 Troubleshooting
+```
+# API Configuration
+REACT_APP_API_URL=http://localhost:8080/api
 
-### Frontend Issues
-- Clear node_modules: `rm -rf node_modules && npm install`
-- Clear cache: `npm cache clean --force`
-- Port 3000 in use: `npx kill-port 3000`
+# Features
+REACT_APP_ENABLE_ANALYTICS=true
+REACT_APP_TRANSACTION_EDIT_LIMIT_HOURS=12
+```
 
-### Backend Issues
-- Maven build failure: `mvn clean install -DskipTests`
-- MongoDB connection: Verify Atlas connection string
-- Port 8080 in use: Check running services
+## 📜 Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm start` | Start development server |
+| `npm run build` | Create production build |
+| `npm test` | Run tests |
+| `npm run eject` | Eject from create-react-app (irreversible) |
+
+## 🔗 API Integration
+
+### Base URL
+```
+http://localhost:8080/api
+```
+
+### Authentication Header
+All requests require the user ID header:
+```
+X-User-Id: <user-id>
+```
+
+### Available Endpoints
+
+#### Transactions
+- `GET /transactions` - Get all transactions
+- `POST /transactions` - Create new transaction
+- `GET /transactions/:id` - Get transaction by ID
+- `PUT /transactions/:id` - Update transaction
+- `DELETE /transactions/:id` - Delete transaction
+- `GET /transactions/type/:type` - Get by type (INCOME/EXPENSE)
+- `GET /transactions/category/:category` - Get by category
+- `GET /transactions/division/:division` - Get by division (Office/Personal)
+- `GET /transactions/filter/date-range` - Get by date range
+
+#### Accounts
+- `GET /accounts` - Get all accounts
+- `POST /accounts` - Create account
+- `GET /accounts/:id` - Get account by ID
+- `PUT /accounts/:id` - Update account
+- `GET /accounts/active` - Get active accounts
+- `GET /accounts/total-balance` - Get total balance
+
+#### Transfers
+- `POST /accounts/transfer` - Create transfer
+- `GET /accounts/transfer` - Get all transfers
+- `GET /accounts/transfer/account/:accountId` - Get transfers for account
+- `GET /accounts/transfer/filter/date-range` - Get transfers by date range
+
+## 🎨 Component Documentation
+
+### Sidebar
+Navigation component for switching between pages.
+
+### Navbar
+Top navigation bar with notifications and profile access.
+
+### HomePage
+Main page with quick stats and recent transaction history.
+
+### Dashboard
+Analytics dashboard with charts for income/expense visualization.
+
+### TransactionModal
+Modal dialog for adding new income or expense transactions.
+
+## 🎯 Styling
+
+This project uses **Tailwind CSS** for styling. Tailwind CSS configuration is in `tailwind.config.js`.
+
+### Custom Classes
+
+- `.btn-primary` - Primary action button
+- `.btn-secondary` - Secondary action button
+- `.btn-danger` - Danger/delete button
+- `.card` - Card component
+- `.input-field` - Input field styling
+- `.modal-overlay` - Modal background overlay
+
+### Custom Colors
+
+```
+primary: #3B82F6 (Blue)
+secondary: #10B981 (Green)
+danger: #EF4444 (Red)
+warning: #F59E0B (Orange)
+dark: #1F2937 (Dark Gray)
+light: #F3F4F6 (Light Gray)
+```
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create feature branch: `git checkout -b feature/YourFeature`
-3. Commit changes: `git commit -m 'Add YourFeature'`
-4. Push to branch: `git push origin feature/YourFeature`
-5. Open Pull Request
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'Add AmazingFeature'`)
+4. Push to branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## 📝 License
 
 This project is licensed under the MIT License.
 
-## 📞 Support & Contact
+## 🆘 Support
 
-For issues, questions, or suggestions:
-- Open an issue in the repository
-- Check existing documentation
-- Review API documentation
-
----
-
-## 📊 File Organization Summary
-
-### Frontend Files (20+ components)
-✓ React components (Sidebar, Navbar, TransactionModal)
-✓ Pages (HomePage, Dashboard)
-✓ Services (API integration)
-✓ Utilities (Helpers, Store management)
-✓ Styles (Tailwind CSS configuration)
-✓ Configuration files (package.json, tsconfig.js)
-
-### Backend Files (40+ Java classes)
-✓ Models (Transaction, Account, Transfer, User)
-✓ DTOs (Data Transfer Objects)
-✓ Controllers (REST endpoints)
-✓ Services (Business logic)
-✓ Repositories (Data access)
-✓ Configuration (Spring & MongoDB)
-✓ Exception handling
-✓ Application entry point
+For issues and questions, please open an issue in the repository or contact the development team.
 
 ---
 
 **Happy Money Managing! 💰**
-
-Built with ❤️ | © 2024 Money Manager

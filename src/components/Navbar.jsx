@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FaBell, FaUser } from 'react-icons/fa';
 
 const Navbar = () => {
@@ -13,11 +14,11 @@ const Navbar = () => {
           <FaBell size={20} />
           <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
         </button>
-        
-        <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition">
+
+        <Link to="/profile" className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition">
           <FaUser size={18} />
           <span className="text-sm font-medium">Profile</span>
-        </button>
+        </Link>
       </div>
     </nav>
   );

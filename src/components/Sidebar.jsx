@@ -28,10 +28,10 @@ const Sidebar = () => {
       </nav>
       
       <div className="border-t border-gray-700 pt-4">
-        <button className="flex items-center gap-3 p-3 w-full rounded-lg hover:bg-gray-800 transition">
+        <Link to="/settings" className="flex items-center gap-3 p-3 w-full rounded-lg hover:bg-gray-800 transition">
           <FaCog size={20} />
           <span>Settings</span>
-        </button>
+        </Link>
       </div>
     </aside>
   );

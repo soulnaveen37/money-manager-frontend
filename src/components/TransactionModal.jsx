@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
+import { useTransactionStore } from '../utils/store';
+import { validateTransactionForm } from '../utils/helpers';
 
 const TransactionModal = ({ isOpen, onClose }) => {
   const [activeTab, setActiveTab] = useState('income');
@@ -10,6 +12,8 @@ const TransactionModal = ({ isOpen, onClose }) => {
     division: 'Personal',
     date: new Date().toISOString().split('T')[0],
   });
+
+  const addTransaction = useTransactionStore((state) => state.addTransaction);
 
   const categories = {
     income: ['Salary', 'Freelance', 'Investment', 'Gift', 'Bonus'],
@@ -26,7 +30,34 @@ const TransactionModal = ({ isOpen, onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Submitting:', { ...formData, type: activeTab });
+    const payload = { ...formData, type: activeTab };
+    const errors = validateTransactionForm(payload);
+    if (Object.keys(errors).length) {
+      // simple UX: log errors for now; could show inline messages later
+      console.warn('Validation errors:', errors);
+      return;
+    }
+
+    const transaction = {
+      id: Date.now().toString(),
+      description: payload.description.trim(),
+      amount: parseFloat(payload.amount),
+      category: payload.category,
+      division: payload.division,
+      transactionDate: payload.date,
+      createdAt: new Date().toISOString(),
+      type: payload.type,
+    };
+
+    addTransaction(transaction);
+    // reset form and close
+    setFormData({
+      description: '',
+      amount: '',
+      category: '',
+      division: 'Personal',
+      date: new Date().toISOString().split('T')[0],
+    });
     onClose();
   };
 

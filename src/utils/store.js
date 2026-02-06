@@ -46,3 +46,18 @@ export const useDashboardStore = create((set) => ({
   setData: (data) => set({ data }),
   setLoading: (loading) => set({ loading }),
 }));
+
+export const useSettingsStore = create((set) => {
+  // Load currency from localStorage on init
+  const savedCurrency = typeof window !== 'undefined' ? localStorage.getItem('currency') : 'INR';
+  
+  return {
+    currency: savedCurrency || 'INR',
+    setCurrency: (currency) => {
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('currency', currency);
+      }
+      set({ currency });
+    },
+  };
+});

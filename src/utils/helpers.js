@@ -1,7 +1,9 @@
 export const formatCurrency = (amount) => {
-  // Use environment variable REACT_APP_CURRENCY if provided, default to INR
-  const currency = (process.env.REACT_APP_CURRENCY || 'INR').toUpperCase();
-  // Use locale based on currency (fallback to 'en-IN' for INR)
+  // Get currency from settings store; fallback to INR if not available
+  const currency = typeof window !== 'undefined' 
+    ? (localStorage.getItem('currency') || 'INR')
+    : 'INR';
+  
   const locale = currency === 'INR' ? 'en-IN' : 'en-US';
 
   return new Intl.NumberFormat(locale, {
